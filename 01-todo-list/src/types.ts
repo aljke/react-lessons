@@ -20,3 +20,7 @@ export const TodoStateLabel = new Map<TodoStateEnum, string>([
 export interface ITodoStateProps {
     state: TodoStateEnum
 }
+
+export interface ITodoListProps {
+    items: TodoItem[]
+}
