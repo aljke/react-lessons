@@ -10,7 +10,6 @@ export class RestClient {
     }
 
     public create<T>(record: T) {
-        debugger;
         return this.makeRequest('', 'POST', record)
     }
 

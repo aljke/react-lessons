@@ -3,15 +3,20 @@ import { Button, ButtonBase, Card, CardActions, CardContent, Grid, Typography } 
 
 export interface IWaiterProps {
     waiter: IWaiter
-    onDelete: (id: number) => void;
+    onDelete: (id: number) => void
+    onEdit: (waiter: IWaiter) => void
 }
 
-export const WaiterItem = ( { waiter, onDelete } : IWaiterProps) => {
+export const WaiterItem = ( { waiter, onDelete, onEdit } : IWaiterProps) => {
 
     function onDeleteBtnClick() {
         if (waiter.id) {
             onDelete(waiter.id)
         }
+    }
+
+    function onEditButtonClick() {
+        onEdit(waiter);
     }
 
     return (
@@ -26,7 +31,8 @@ export const WaiterItem = ( { waiter, onDelete } : IWaiterProps) => {
                             </CardContent>
                         </ButtonBase>
                         <CardActions>
-                            <Button size="small" onClick={onDeleteBtnClick}>Edit</Button>
+                            <Button size="small" onClick={onDeleteBtnClick}>Delete</Button>
+                            <Button size="small" onClick={onEditButtonClick}>Edit</Button>
                         </CardActions>
                     </Card>
                 </Grid>

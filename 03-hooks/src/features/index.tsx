@@ -1,37 +1,17 @@
-import React, { useEffect } from "react"
-import { IWaiter } from "../type"
-import { AddWaiter } from "./waiters/AddWaiter"
+import { EditWaiter } from "./waiters/EditWaiter"
 import { WaitersList } from "./waiters/WaitersList"
-import { MockApiClient } from "./waiters/api/mockApiClient"
+import { useWaiter } from "./waiters/hooks/useWaiter"
 
-export const WaitersApp = () => 
-{
-    const [waitersSource, setWaiters] = React.useState<IWaiter[]>([])
+export const WaitersApp = () => {
 
-    useEffect(() => {
-        MockApiClient.getItems<IWaiter>().then(waitersResponse => {
-            setWaiters(waitersResponse)
-        })
-    }, [])
-
-    const onWaiterSubmit = (waiter: IWaiter) => {
-        MockApiClient.create(waiter).then((postedWaiter) => {
-            setWaiters([...waitersSource, postedWaiter])
-        })
-      }
-
-      const deleteWaiter = (id: number) => {
-        MockApiClient.delete(id).then(() => {
-            setWaiters(waitersSource.filter((x) => x.id !== id))
-        })
-      }
+    const { onWaiterSubmit, editedWaiterBuffer, waitersSource, deleteWaiter, editWaiter } = useWaiter();
 
     return (
         <div>
-            <AddWaiter onWaiterSubmit={onWaiterSubmit} />
+            <EditWaiter onWaiterSubmit={onWaiterSubmit} editedWaiter={editedWaiterBuffer}/>
             <br />
             <br />
-            <WaitersList waiters={waitersSource} onDeleteWaiters={deleteWaiter} />
+            <WaitersList waiters={waitersSource} onDeleteWaiters={deleteWaiter} onEditWaiters={editWaiter} />
         </div>
     )
 }
