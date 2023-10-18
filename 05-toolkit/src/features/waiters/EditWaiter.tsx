@@ -12,7 +12,7 @@ export const EditWaiter = () => {
   const [phone, setPhone] = useState(editedWaiterBuffer.phone)
 
   const isLoading = useSelector((state: RootState) => state.waiters.saveWaiterLoading)
-  const loadingError = useSelector((state: RootState) => state.waiters.saveWaiterLoadingError)
+  const saveWaiterError = useSelector((state: RootState) => state.waiters.saveWaiterLoadingError)
 
   useEffect(() => {
     setName(editedWaiterBuffer.firstName)
@@ -23,8 +23,8 @@ export const EditWaiter = () => {
     return <CircularProgress />
   }
 
-  if (loadingError) {
-      return <Alert severity="error">{loadingError.message}</Alert>
+  if (saveWaiterError) {
+      return <Alert severity="error"> Couldn't save the waiter: {saveWaiterError.message}</Alert>
   }
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {

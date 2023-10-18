@@ -10,7 +10,8 @@ export const WaitersList = () => {
     const dispatch = useDispatch()
     const isLoading = useSelector((state: RootState) => state.waiters.sourceLoading || state.waiters.deleteWaiterLoading)
     const waitersSource = useSelector((state: RootState) => state.waiters.waitersSource)
-    const loadingError = useSelector((state: RootState) => state.waiters.sourceLoadingError ?? state.waiters.deleteWaiterError)
+    const loadingSourceError = useSelector((state: RootState) => state.waiters.sourceLoadingError)
+    const waiterDeletionError = useSelector((state: RootState) => state.waiters.deleteWaiterError)
 
     useEffect(() => {
         dispatch(getWaitersSource())
@@ -20,8 +21,12 @@ export const WaitersList = () => {
         return <CircularProgress />
     }
 
-    if (loadingError) {
-        return <Alert severity="error">{loadingError.message}</Alert>
+    if (loadingSourceError) {
+        return <Alert severity="error"> Couldn't load waiters: {loadingSourceError.message}</Alert>
+    }
+
+    if (waiterDeletionError) {
+        return <Alert severity="error">Couldn't delete a waiter: {waiterDeletionError.message}</Alert>
     }
 
     return(
