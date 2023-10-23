@@ -19,7 +19,7 @@ export const WaiterItem = ( { waiter } : IWaiterProps) => {
     }
 
     function onEditButtonClick() {
-        navigate(`/waiter/edit/${waiter.id}`)
+        navigate(`/waiters/edit/${waiter.id}`)
     }
 
     return (
