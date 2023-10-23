@@ -49,7 +49,7 @@ export const EditWaiter = () => {
     }
 
     dispatch(saveWaiter(updatedWaiter))
-    navigate("/waiter");
+    navigate("/waiters");
   }
 
   return (

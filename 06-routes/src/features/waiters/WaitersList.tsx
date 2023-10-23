@@ -32,12 +32,12 @@ export const WaitersList = () => {
 
     return(
             <div>
-                <Link to="/waiter/create"><button>Create</button></Link>
+                <Link to="/waiters/create"><button>Create</button></Link>
 
                 <br />
                 <br />
                 <br />
-                
+
                 <Grid container spacing={4}>
                 {waitersSource.map((waiterData: IWaiter) => 
                     (<WaiterItem waiter={waiterData} key={waiterData.id} />)
