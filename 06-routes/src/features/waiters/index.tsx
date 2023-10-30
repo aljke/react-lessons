@@ -1,5 +1,5 @@
-import { EditWaiter } from "./waiters/EditWaiter"
-import { WaitersList } from "./waiters/WaitersList"
+import { EditWaiter } from "./EditWaiter"
+import { WaitersList } from "./WaitersList"
 import {Routes, Route} from "react-router-dom";
 
 export const WaitersApp = () => {

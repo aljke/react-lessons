@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import { WaitersApp } from './features';
+import { WaitersApp } from './features/waiters';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
