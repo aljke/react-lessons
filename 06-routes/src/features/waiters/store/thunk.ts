@@ -29,13 +29,14 @@ export function removeWaiter(id: number): any {
     }
 }
 
-export function saveWaiter(waiter: IWaiter): any {
+export function saveWaiter(waiter: IWaiter, onSuccess: () => void): any {
     return (dispatch: any) => {
         dispatch(saveWaiterLoadingAction())
 
         if (waiter.id) {
             MockApiClient.update(waiter.id, waiter).then((updatedWaiter) => {
                 dispatch(updateWaiterAction(updatedWaiter))
+                onSuccess()
             })
             .catch((error) => {
                 dispatch(saveWaiterLoadingActionError(error))
@@ -44,6 +45,7 @@ export function saveWaiter(waiter: IWaiter): any {
         else {
             MockApiClient.create(waiter).then((createdWaiter) => {
                 dispatch(createWaiterAction(createdWaiter))
+                onSuccess()
             })
             .catch((error) => {
                 dispatch(saveWaiterLoadingActionError(error))

@@ -35,10 +35,6 @@ export const EditWaiter = () => {
     return <CircularProgress />
   }
 
-  if (saveWaiterError) {
-      return <Alert severity="error"> Couldn't save the waiter: {saveWaiterError.message}</Alert>
-  }
-
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -48,12 +44,12 @@ export const EditWaiter = () => {
       phone
     }
 
-    dispatch(saveWaiter(updatedWaiter))
-    navigate("/waiters");
+    dispatch(saveWaiter(updatedWaiter, () => { navigate("/waiters")} ))
   }
 
   return (
-    <form onSubmit={onFormSubmit}>
+    <div>
+      <form onSubmit={onFormSubmit}>
       <div>
         <label htmlFor="name">Name</label>
         <input value={firstName} onChange={e => setName(e.target.value)} type="text" id="name" />
@@ -66,5 +62,8 @@ export const EditWaiter = () => {
 
       <button type="submit">Submit</button>
     </form>
+
+    { saveWaiterError && <Alert severity="error"> Couldn't save the waiter: {saveWaiterError?.message}</Alert> }
+    </div>
   )
 }
