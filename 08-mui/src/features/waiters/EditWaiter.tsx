@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import { getWaiterById, saveWaiter } from "./store/thunk";
 import { RootState } from "../../store";
-import { CircularProgress, Alert } from "@mui/material";
+import { CircularProgress, Alert, Button, TextField, Stack } from "@mui/material";
 import { useNavigate, useParams } from "react-router-dom";
 import { DEFAULT_WAITER, setEditedWaiterBufferAction } from "./store/reducer";
   
@@ -48,22 +48,30 @@ export const EditWaiter = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={onFormSubmit}>
-      <div>
-        <label htmlFor="name">Name</label>
-        <input value={firstName} onChange={e => setName(e.target.value)} type="text" id="name" />
-      </div>
+      <Stack
+            component="form"
+            spacing={2}
+            noValidate
+            autoComplete="off"
+            onSubmit={onFormSubmit}
+          >
+          <TextField
+            label="Name"
+            value={firstName}
+            onChange={(e) => setName(e.target.value)}
+          />
 
-      <div>
-        <label htmlFor="phone">Phone</label>
-        <input value={phone} onChange={e => setPhone(e.target.value)} type="text" id="phone" />
-      </div>
+          <TextField
+            label="Phone"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
 
-      <button type="submit">Submit</button>
-    </form>
+        <Button type="submit" variant="contained" color="primary">
+          Submit
+        </Button>
 
-    { saveWaiterError && <Alert severity="error"> Couldn't save the waiter: {saveWaiterError?.message}</Alert> }
-    </div>
+        { saveWaiterError && <Alert severity="error"> Couldn't save the waiter: {saveWaiterError?.message}</Alert> }
+      </Stack>
   )
 }
