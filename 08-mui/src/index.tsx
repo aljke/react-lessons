@@ -3,32 +3,36 @@ import './index.css';
 import { WaitersApp } from './features/waiters';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { NotFound } from './features/NotFound';
 import { About } from './features/About';
-import "./App.css";
+import { Container, Stack, AppBar, Toolbar } from '@mui/material';
+import { Navigation } from './components/Navigation';
+import {ThemeProvider} from "./components/ThemeProvider";
 
-function App() {
-  const isActiveClass = ({ isActive }: any) => isActive ? "active" : "";
-  
+export function App() {
   return (
-    <div className="App">
-      <Provider store={store}>
+    <Provider store={store}>
       <BrowserRouter>
-          <nav className='navigation'>
-            <NavLink to="/" className={isActiveClass}>Home</NavLink>{' | '}
-            <NavLink to="/waiters" className={isActiveClass}>Waiters</NavLink>{' | '}
-            <NavLink to="/about" className={isActiveClass} end>About</NavLink>
-          </nav>
-        <Routes>
-          <Route path="/waiters/*" element={<WaitersApp />} />
-          <Route path="/" element={<WaitersApp />} />
-          <Route path="/about" element={<About />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <ThemeProvider>
+          <Container maxWidth="md">
+            <Stack spacing={2}>
+              <AppBar position="static">
+                <Toolbar>
+                  <Navigation />
+                </Toolbar>
+              </AppBar>
+              <Routes>
+                <Route path="/" element={<WaitersApp/>}/>
+                <Route path="/waiters/*" element={<WaitersApp/>}/>
+                <Route path="/about" element={<About/>}/>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Stack>
+          </Container>
+        </ThemeProvider>
       </BrowserRouter>
-      </Provider>
-    </div>
+    </Provider>
   );
 }
 

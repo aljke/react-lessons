@@ -1,4 +1,4 @@
-import { Alert, CircularProgress, Grid } from "@mui/material";
+import { Alert, Box, Button, CircularProgress, Grid } from "@mui/material";
 import { WaiterItem } from "./WaiterItem";
 import { IWaiter } from "./type";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,9 +34,12 @@ export const WaitersList = () => {
 
     return(
             <div>
-                <Link to="/waiters/create"><button>Create</button></Link>
+                <Box>
+                    <Link to="/waiters/create">
+                        <Button size="small" variant="outlined">Create</Button>
+                    </Link>
+                </Box>
 
-                <br />
                 <br />
                 <br />
 
